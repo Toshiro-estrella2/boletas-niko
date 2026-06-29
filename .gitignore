@@ -28,7 +28,15 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-# /build/      ← comentado para subir build/web
+
+# Build — solo permitir build/web
+build/app/
+build/flutter_assets/
+build/*.dill
+build/*.cache
+build/windows/
+build/linux/
+build/macos/
 
 # Symbolication related
 app.*.symbols
