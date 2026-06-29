@@ -129,22 +129,36 @@ String _rolLabel(String area, String tipo) {
   bool _esFavorito() =>
       _favoritos.any((f) => f['serie'] == _serieActual && f['numero'] == _numeroActual);
 
-  Future<void> _toggleFavorito() async {
-    if (_serieActual == null || _numeroActual == null) return;
-    setState(() {
-      if (_esFavorito()) {
-        _favoritos.removeWhere(
-            (f) => f['serie'] == _serieActual && f['numero'] == _numeroActual);
-      } else {
-        _favoritos.add({
-          'serie': _serieActual!,
-          'numero': _numeroActual!,
-          'descripcion': _items.isNotEmpty ? _items.first.descripcionFinal : '',
-        });
-      }
-    });
-    await _guardarFavoritos();
-  }
+Future<void> _toggleFavorito() async {
+  if (_serieActual == null || _numeroActual == null) return;
+  setState(() {
+    if (_esFavorito()) {
+      _favoritos.removeWhere(
+          (f) => f['serie'] == _serieActual && f['numero'] == _numeroActual);
+    } else {
+      // Obtener fechas únicas de S e I desde los items actuales
+      final fechasS = _items
+          .where((i) => i.tipoMode == 'S')
+          .map((i) => i.fechaCreacion.split('  ').first)
+          .toSet()
+          .join(',');
+      final fechasI = _items
+          .where((i) => i.tipoMode == 'I')
+          .map((i) => i.fechaCreacion.split('  ').first)
+          .toSet()
+          .join(',');
+
+      _favoritos.add({
+        'serie': _serieActual!,
+        'numero': _numeroActual!,
+        'descripcion': _items.isNotEmpty ? _items.first.descripcionFinal : '',
+        'fechas_s': fechasS,   // ← nuevo
+        'fechas_i': fechasI,   // ← nuevo
+      });
+    }
+  });
+  await _guardarFavoritos();
+}
 
   Future<void> _eliminarFavorito(Map<String, String> fav) async {
     setState(() => _favoritos.remove(fav));
@@ -152,23 +166,20 @@ String _rolLabel(String area, String tipo) {
   }
 
 void _abrirFavoritos() {
-  // Mapa para guardar firmas de cada favorito: "serie-numero" → List<Firma>
   final Map<String, List<Firma>> firmasPorFav = {};
 
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
     builder: (ctx) => StatefulBuilder(
       builder: (ctx, setModalState) {
-        // Cargar firmas de todos los favoritos al abrir
         Future<void> cargarFirmasFavoritos() async {
           for (final fav in _favoritos) {
             final key = '${fav['serie']}-${fav['numero']}';
             if (!firmasPorFav.containsKey(key)) {
-              final firmas = await SupabaseService.getFirmas(
-                  fav['serie']!, fav['numero']!);
-              // Resolver nombres
+              final firmas = await SupabaseService.getFirmas(fav['serie']!, fav['numero']!);
               for (final f in firmas) {
                 final u = _usuariosMap[f.usuarioId];
                 if (u != null) { f.nombre = u.nombre; f.area = u.area; }
@@ -179,114 +190,194 @@ void _abrirFavoritos() {
           setModalState(() {});
         }
 
-        // Cargar al primer render
         if (firmasPorFav.isEmpty && _favoritos.isNotEmpty) {
           cargarFirmasFavoritos();
         }
 
-        return Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Boletas Guardadas',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 12),
-              if (_favoritos.isEmpty)
-                const Center(
-                    child: Padding(
-                        padding: EdgeInsets.all(24),
-                        child: Text('No hay boletas guardadas.',
-                            style: TextStyle(color: Colors.grey))))
-              else
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: _favoritos.length,
-                    itemBuilder: (_, i) {
-                      final fav = _favoritos[i];
-                      final key = '${fav['serie']}-${fav['numero']}';
-                      final firmasFav = firmasPorFav[key] ?? [];
-                      final firmado = firmasFav.any(
-                          (f) => f.area == widget.usuarioActual.area);
+        return DraggableScrollableSheet(
+          initialChildSize: 0.75,
+          maxChildSize: 0.95,
+          minChildSize: 0.4,
+          expand: false,
+          builder: (_, scrollCtrl) => Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Boletas Guardadas',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 12),
+                if (_favoritos.isEmpty)
+                  const Center(
+                      child: Padding(
+                          padding: EdgeInsets.all(24),
+                          child: Text('No hay boletas guardadas.',
+                              style: TextStyle(color: Colors.grey))))
+                else
+                  Expanded(
+                    child: ListView.builder(
+                      controller: scrollCtrl,
+                      itemCount: _favoritos.length,
+                      itemBuilder: (_, i) {
+                        final fav = _favoritos[i];
+                        final key = '${fav['serie']}-${fav['numero']}';
+                        final firmasFav = firmasPorFav[key] ?? [];
+                        final cargado = firmasPorFav.containsKey(key);
 
-                      return Card(
-                        child: ListTile(
-                          leading: const Icon(Icons.receipt_long, color: Colors.blue),
-                          title: Text('${fav['serie']} - ${fav['numero']}',
-                              style: const TextStyle(fontWeight: FontWeight.bold)),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(fav['descripcion'] ?? ''),
-                              const SizedBox(height: 4),
-                              // Badge solo si NO es CALIDAD
-                              if (widget.usuarioActual.area != 'CALIDAD')
-                                firmasPorFav.containsKey(key)
-                                    ? Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 6, vertical: 2),
-                                        decoration: BoxDecoration(
-                                          color: firmado
-                                              ? Colors.green.shade600
-                                              : Colors.orange.shade700,
-                                          borderRadius: BorderRadius.circular(4),
+                        
+                        // Fechas donde el área actual ya firmó, separadas por tipo
+                        final firmadasS = <String>{};
+                        final firmadasI = <String>{};
+                        for (final f in firmasFav) {
+                          if (f.area == widget.usuarioActual.area) {
+                            if (f.tipo == 'S') firmadasS.add(f.fecha);
+                            if (f.tipo == 'I') firmadasI.add(f.fecha);
+                          }
+                        }
+                        
+                        // Fechas desde favoritos guardados (movimientos del GESCOM)
+                        final todasFechasS = (fav['fechas_s'] ?? '')
+                            .split(',')
+                            .where((f) => f.isNotEmpty)
+                            .toList();
+                        final todasFechasI = (fav['fechas_i'] ?? '')
+                            .split(',')
+                            .where((f) => f.isNotEmpty)
+                            .toList();
+
+                        return Card(
+                          margin: const EdgeInsets.only(bottom: 8),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Encabezado
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.receipt_long, color: Colors.blue, size: 20),
+                                        const SizedBox(width: 8),
+                                        Text('${fav['serie']} - ${fav['numero']}',
+                                            style: const TextStyle(fontWeight: FontWeight.bold)),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(Icons.open_in_new, color: Colors.blue, size: 20),
+                                          onPressed: () async {
+                                            Navigator.pop(ctx);
+                                            _serieController.text = fav['serie']!;
+                                            _numeroController.text = fav['numero']!.replaceFirst('000', '');
+                                            await _buscar();
+                                          },
                                         ),
-                                        child: Text(
-                                          firmado ? '✓ FIRMADO' : '⏳ PENDIENTE',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                        IconButton(
+                                          icon: const Icon(Icons.delete_outline, color: Colors.red, size: 20),
+                                          onPressed: () async {
+                                            await _eliminarFavorito(fav);
+                                            setModalState(() {});
+                                          },
                                         ),
-                                      )
-                                    : Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                            height: 10,
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: 2,
-                                              color: Colors.grey.shade400,
+                                      ],
+                                    ),
+                                  ],
+                                ),
+
+                                if (widget.usuarioActual.area != 'CALIDAD') ...[
+                                  const Divider(height: 12),
+                                  if (!cargado)
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 12, height: 12,
+                                          child: CircularProgressIndicator(
+                                              strokeWidth: 2, color: Colors.grey.shade400),
+                                        ),
+                                        const SizedBox(width: 6),
+                                        Text('Verificando firmas...',
+                                            style: TextStyle(fontSize: 11, color: Colors.grey.shade500)),
+                                      ],
+                                    )
+                                    else ...[
+                                      // Salidas (S)
+                                      if (todasFechasS.isNotEmpty) ...[
+                                        const Text('Salidas (S):',
+                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                                        const SizedBox(height: 4),
+                                        ...todasFechasS.map((fecha) {
+                                          final firmado = firmadasS.contains(fecha);
+                                          return Padding(
+                                            padding: const EdgeInsets.only(bottom: 3),
+                                            child: Row(
+                                              children: [
+                                                const SizedBox(width: 8),
+                                                Text(fecha, style: const TextStyle(fontSize: 11)),
+                                                const SizedBox(width: 8),
+                                                Container(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                                                  decoration: BoxDecoration(
+                                                    color: firmado ? Colors.green.shade600 : Colors.orange.shade700,
+                                                    borderRadius: BorderRadius.circular(4),
+                                                  ),
+                                                  child: Text(
+                                                    firmado ? '✓ FIRMADO' : '⏳ PENDIENTE',
+                                                    style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                          const SizedBox(width: 6),
-                                          Text('Verificando...',
-                                              style: TextStyle(
-                                                  fontSize: 10,
-                                                  color: Colors.grey.shade500)),
-                                        ],
-                                      ),
-                            ],
+                                          );
+                                        }),
+                                        const SizedBox(height: 6),
+                                      ],
+                                      // Ingresos (I)
+                                      if (todasFechasI.isNotEmpty) ...[
+                                        const Text('Ingresos (I):',
+                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                                        const SizedBox(height: 4),
+                                        ...todasFechasI.map((fecha) {
+                                          final firmado = firmadasI.contains(fecha);
+                                          return Padding(
+                                            padding: const EdgeInsets.only(bottom: 3),
+                                            child: Row(
+                                              children: [
+                                                const SizedBox(width: 8),
+                                                Text(fecha, style: const TextStyle(fontSize: 11)),
+                                                const SizedBox(width: 8),
+                                                Container(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                                                  decoration: BoxDecoration(
+                                                    color: firmado ? Colors.green.shade600 : Colors.orange.shade700,
+                                                    borderRadius: BorderRadius.circular(4),
+                                                  ),
+                                                  child: Text(
+                                                    firmado ? '✓ FIRMADO' : '⏳ PENDIENTE',
+                                                    style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        }),
+                                      ],
+                                      if (todasFechasS.isEmpty && todasFechasI.isEmpty)
+                                        Text('Sin movimientos registrados',
+                                            style: TextStyle(fontSize: 11, color: Colors.grey.shade500)),
+                                    ],
+                                ],
+                              ],
+                            ),
                           ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.open_in_new, color: Colors.blue),
-                                onPressed: () async {
-                                  Navigator.pop(ctx);
-                                  _serieController.text = fav['serie']!;
-                                  _numeroController.text =
-                                      fav['numero']!.replaceFirst('000', '');
-                                  await _buscar();
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.delete_outline, color: Colors.red),
-                                onPressed: () async {
-                                  await _eliminarFavorito(fav);
-                                  setModalState(() {});
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -349,6 +440,33 @@ Future<void> _buscar() async {
   } finally {
     setState(() => _loading = false);
   }
+}
+
+Widget _guiaItem(IconData icono, String titulo, String descripcion) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 12),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icono, size: 20, color: Colors.blue.shade600),
+        const SizedBox(width: 10),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              style: const TextStyle(fontSize: 13, color: Colors.black87),
+              children: [
+                TextSpan(
+                  text: '$titulo: ',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                TextSpan(text: descripcion),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
   @override
@@ -748,7 +866,54 @@ Future<void> _buscar() async {
                         style: const TextStyle(color: Colors.grey)),
                   ),
                 ),
-            ],
+              ] else if (!_loading && _error == null) ...[
+                const SizedBox(height: 24),
+                // ── GUÍA DE USO ──
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade50,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.blue.shade100),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.info_outline, color: Colors.blue.shade700),
+                          const SizedBox(width: 8),
+                          Text('¿Cómo usar la app?',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.blue.shade700)),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      _guiaItem(Icons.tag, 'Serie',
+                          'Código de la serie de la boleta. Por defecto es 026 y puede admitir A26 o P26'),
+                      _guiaItem(Icons.pin, 'Número',
+                          'Ingresa los últimos 4 dígitos. Ej: si el número es 0001010, escribe 1010.'),
+                      _guiaItem(Icons.search, 'Buscar',
+                          'Presiona el botón para cargar los materiales de la boleta.'),
+                      _guiaItem(Icons.swap_horiz, 'Salidas / Ingresos',
+                          'Filtra entre materiales que salieron (S) o ingresaron (I) del almacén.'),
+                      _guiaItem(Icons.calculate_outlined, 'Total por código',
+                          'Muestra la suma total de cada material en toda la boleta.'),
+                      _guiaItem(Icons.calendar_today, 'Fechas',
+                          'Los movimientos están agrupados por fecha. Toca una fecha para expandirla.'),
+                      _guiaItem(Icons.draw, 'Firmar',
+                          'Registra tu conformidad en una fecha específica como ${widget.usuarioActual.area}.'),
+                      _guiaItem(Icons.bookmark_border, 'Guardar boleta',
+                          'Guarda la boleta actual en favoritos para acceder rápido después.'),
+                      _guiaItem(Icons.bookmarks_outlined, 'Favoritos',
+                          'Ver todas tus boletas guardadas y su estado de firma por fecha.'),
+                    ],
+                  ),
+                ),
+              ],
           ],
         ),
       ),

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable/notification_bg_low.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable/notification_bg.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable/notification_icon_background.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable/notification_tile_bg.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable/notification_tile_bg.xml"
+    }
+]

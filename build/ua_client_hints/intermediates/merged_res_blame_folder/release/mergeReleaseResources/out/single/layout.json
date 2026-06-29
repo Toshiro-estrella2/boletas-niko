@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/layout/ime_base_split_test_activity.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/layout/ime_base_split_test_activity.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/layout/notification_template_part_chronometer.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/layout/custom_dialog.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/layout/notification_template_part_time.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/layout/ime_secondary_split_test_activity.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/layout/ime_secondary_split_test_activity.xml"
+    }
+]

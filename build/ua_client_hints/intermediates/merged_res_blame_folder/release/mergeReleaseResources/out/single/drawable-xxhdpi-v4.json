@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable-xxhdpi-v4/ic_call_answer_video.png",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable-xxhdpi-v4/ic_call_answer_video.png"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable-xxhdpi-v4/ic_call_decline_low.png",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable-xxhdpi-v4/ic_call_decline_low.png"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable-xxhdpi-v4/ic_call_answer_video_low.png",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable-xxhdpi-v4/ic_call_answer_video_low.png"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable-xxhdpi-v4/ic_call_decline.png",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable-xxhdpi-v4/ic_call_decline.png"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable-xxhdpi-v4/ic_call_answer_low.png",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable-xxhdpi-v4/ic_call_answer_low.png"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/drawable-xxhdpi-v4/ic_call_answer.png",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-core-1.13.1-10:/drawable-xxhdpi-v4/ic_call_answer.png"
+    }
+]

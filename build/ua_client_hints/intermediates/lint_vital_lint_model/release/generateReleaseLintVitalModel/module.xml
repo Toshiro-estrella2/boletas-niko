@@ -1,0 +1,26 @@
+<lint-module
+    format="1"
+    dir="C:\Users\Usuario\AppData\Local\Pub\Cache\hosted\pub.dev\ua_client_hints-1.7.0\android"
+    name=":ua_client_hints"
+    type="LIBRARY"
+    maven="jp.wasabeef.ua.client_hints:ua_client_hints:1.5.0"
+    agpVersion="8.7.3"
+    buildFolder="C:\Users\Usuario\boletas_app\build\ua_client_hints"
+    bootClassPath="C:\Users\Usuario\AppData\Local\Android\sdk\platforms\android-34\android.jar;C:\Users\Usuario\AppData\Local\Android\sdk\build-tools\34.0.0\core-lambda-stubs.jar"
+    javaSourceLevel="17"
+    compileTarget="android-34"
+    neverShrinking="true">
+  <lintOptions
+      disable="InvalidPackage"
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true">
+    <severities>
+      <severity
+        id="InvalidPackage"
+        severity="IGNORE" />
+    </severities>
+  </lintOptions>
+  <variant name="release"/>
+</lint-module>

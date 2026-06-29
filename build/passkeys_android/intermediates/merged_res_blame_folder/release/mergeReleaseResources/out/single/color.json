@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/color/common_google_signin_btn_text_light.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/color/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/color/common_google_signin_btn_text_dark.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/color/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/color/common_google_signin_btn_tint.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/color/common_google_signin_btn_tint.xml"
+    }
+]

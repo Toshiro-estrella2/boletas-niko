@@ -1,0 +1,1 @@
+jp.wasabeef.ua.client_hints

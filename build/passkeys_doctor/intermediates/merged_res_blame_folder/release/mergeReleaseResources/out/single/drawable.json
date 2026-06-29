@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.corbado.passkeys_doctor-release-27:/drawable/notification_tile_bg.xml",
+        "source": "com.corbado.passkeys_doctor-core-1.13.1-10:/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_doctor-release-27:/drawable/notification_bg_low.xml",
+        "source": "com.corbado.passkeys_doctor-core-1.13.1-10:/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_doctor-release-27:/drawable/notification_bg.xml",
+        "source": "com.corbado.passkeys_doctor-core-1.13.1-10:/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_doctor-release-27:/drawable/notification_icon_background.xml",
+        "source": "com.corbado.passkeys_doctor-core-1.13.1-10:/drawable/notification_icon_background.xml"
+    }
+]

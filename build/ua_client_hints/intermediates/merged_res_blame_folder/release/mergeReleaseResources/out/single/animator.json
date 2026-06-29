@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/animator/fragment_fade_exit.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-fragment-1.7.1-2:/animator/fragment_fade_exit.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/animator/fragment_open_exit.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-fragment-1.7.1-2:/animator/fragment_open_exit.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/animator/fragment_close_exit.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-fragment-1.7.1-2:/animator/fragment_close_exit.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/animator/fragment_fade_enter.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-fragment-1.7.1-2:/animator/fragment_fade_enter.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/animator/fragment_close_enter.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-fragment-1.7.1-2:/animator/fragment_close_enter.xml"
+    },
+    {
+        "merged": "jp.wasabeef.ua.client_hints.ua_client_hints-release-25:/animator/fragment_open_enter.xml",
+        "source": "jp.wasabeef.ua.client_hints.ua_client_hints-fragment-1.7.1-2:/animator/fragment_open_enter.xml"
+    }
+]

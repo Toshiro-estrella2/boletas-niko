@@ -1,0 +1,86 @@
+[
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_text_dark_normal.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_text_dark_normal.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/notification_bg_low.xml",
+        "source": "com.corbado.passkeys_android-core-1.13.1-11:/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_icon_dark_normal.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_icon_dark_normal.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/ic_password.xml",
+        "source": "com.corbado.passkeys_android-jetified-credentials-1.3.0-15:/drawable/ic_password.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/ic_other_sign_in.xml",
+        "source": "com.corbado.passkeys_android-jetified-credentials-1.3.0-15:/drawable/ic_other_sign_in.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/notification_tile_bg.xml",
+        "source": "com.corbado.passkeys_android-core-1.13.1-11:/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_text_disabled.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_text_disabled.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_icon_light.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_icon_light_focused.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_icon_light_focused.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_text_light.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_text_dark_focused.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_text_dark_focused.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_icon_light_normal.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_icon_light_normal.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/notification_icon_background.xml",
+        "source": "com.corbado.passkeys_android-core-1.13.1-11:/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_icon_dark_focused.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_icon_dark_focused.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_text_dark.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/notification_bg.xml",
+        "source": "com.corbado.passkeys_android-core-1.13.1-11:/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_text_light_normal.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_text_light_normal.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/ic_passkey.xml",
+        "source": "com.corbado.passkeys_android-jetified-credentials-1.3.0-15:/drawable/ic_passkey.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_icon_dark.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_icon_dark.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_icon_disabled.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_icon_disabled.xml"
+    },
+    {
+        "merged": "com.corbado.passkeys_android-release-28:/drawable/common_google_signin_btn_text_light_focused.xml",
+        "source": "com.corbado.passkeys_android-jetified-play-services-base-18.3.0-17:/drawable/common_google_signin_btn_text_light_focused.xml"
+    }
+]

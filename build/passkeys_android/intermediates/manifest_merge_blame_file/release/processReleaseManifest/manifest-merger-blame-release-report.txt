@@ -1,0 +1,17 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.corbado.passkeys_android" >
+4
+5    <uses-sdk android:minSdkVersion="23" />
+6
+7    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+7-->C:\Users\Usuario\AppData\Local\Pub\Cache\hosted\pub.dev\passkeys_android-2.12.0\android\src\main\AndroidManifest.xml:4:5-72
+7-->C:\Users\Usuario\AppData\Local\Pub\Cache\hosted\pub.dev\passkeys_android-2.12.0\android\src\main\AndroidManifest.xml:4:22-69
+8    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+8-->C:\Users\Usuario\AppData\Local\Pub\Cache\hosted\pub.dev\passkeys_android-2.12.0\android\src\main\AndroidManifest.xml:5:5-74
+8-->C:\Users\Usuario\AppData\Local\Pub\Cache\hosted\pub.dev\passkeys_android-2.12.0\android\src\main\AndroidManifest.xml:5:22-71
+9    <uses-permission android:name="android.permission.CREDENTIAL_MANAGER_SET_ORIGIN" />
+9-->C:\Users\Usuario\AppData\Local\Pub\Cache\hosted\pub.dev\passkeys_android-2.12.0\android\src\main\AndroidManifest.xml:6:5-88
+9-->C:\Users\Usuario\AppData\Local\Pub\Cache\hosted\pub.dev\passkeys_android-2.12.0\android\src\main\AndroidManifest.xml:6:22-85
+10
+11</manifest>

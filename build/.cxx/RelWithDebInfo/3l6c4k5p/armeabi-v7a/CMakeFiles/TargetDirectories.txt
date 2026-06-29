@@ -1,0 +1,2 @@
+C:/Users/Usuario/boletas_app/build/.cxx/RelWithDebInfo/3l6c4k5p/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Usuario/boletas_app/build/.cxx/RelWithDebInfo/3l6c4k5p/armeabi-v7a/CMakeFiles/rebuild_cache.dir

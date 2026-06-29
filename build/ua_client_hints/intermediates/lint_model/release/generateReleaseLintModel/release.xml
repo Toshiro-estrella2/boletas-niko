@@ -1,0 +1,31 @@
+<variant
+    name="release"
+    package="jp.wasabeef.ua.client_hints"
+    minSdkVersion="22"
+    targetSdkVersion="22"
+    mergedManifest="C:\Users\Usuario\boletas_app\build\ua_client_hints\intermediates\merged_manifest\release\processReleaseManifest\AndroidManifest.xml"
+    manifestMergeReport="C:\Users\Usuario\boletas_app\build\ua_client_hints\outputs\logs\manifest-merger-release-report.txt"
+    proguardFiles="C:\Users\Usuario\boletas_app\build\ua_client_hints\intermediates\default_proguard_files\global\proguard-android.txt-8.7.3"
+    partialResultsDir="C:\Users\Usuario\boletas_app\build\ua_client_hints\intermediates\lint_partial_results\release\lintAnalyzeRelease\out">
+  <buildFeatures
+      namespacing="REQUIRED"/>
+  <sourceProviders>
+    <sourceProvider
+        manifests="src\main\AndroidManifest.xml"
+        javaDirectories="src\main\java;src\main\kotlin;src\release\java;src\release\kotlin"
+        resDirectories="src\main\res;src\release\res"
+        assetsDirectories="src\main\assets;src\release\assets"/>
+  </sourceProviders>
+  <testSourceProviders>
+  </testSourceProviders>
+  <testFixturesSourceProviders>
+  </testFixturesSourceProviders>
+  <artifact
+      classOutputs="C:\Users\Usuario\boletas_app\build\ua_client_hints\intermediates\javac\release\compileReleaseJavaWithJavac\classes;C:\Users\Usuario\boletas_app\build\ua_client_hints\tmp\kotlin-classes\release;C:\Users\Usuario\boletas_app\build\ua_client_hints\intermediates\compile_r_class_jar\release\generateReleaseRFile\R.jar"
+      type="MAIN"
+      applicationId="jp.wasabeef.ua.client_hints"
+      generatedSourceFolders="C:\Users\Usuario\boletas_app\build\ua_client_hints\generated\ap_generated_sources\release\out"
+      generatedResourceFolders="C:\Users\Usuario\boletas_app\build\ua_client_hints\generated\res\resValues\release"
+      desugaredMethodsFiles="C:\Users\Usuario\.gradle\caches\8.12\transforms\c082f508275192ac0b9ae40f17bb04a3\transformed\D8BackportedDesugaredMethods.txt">
+  </artifact>
+</variant>
